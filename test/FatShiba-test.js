@@ -60,9 +60,20 @@ describe("FatShiba", async () => {
   });
 
   it("Check pause/unpause transfer", async () => {
+    expect(await token.isPaused()).to.equal(false);
     await token.grantRole(minterRole, owner.address);
     await token.mint(owner.address, ethers.utils.parseUnits("100", 18));
 
-    await token.transfer(add1.address, ethers.utils.parseUnits(""));
+    await token.transfer(addr1.address, ethers.utils.parseUnits("50", 18));
+    expect(await token.balanceOf(owner.address)).to.equal(
+      ethers.utils.parseUnits("50", 18)
+    );
+
+    await token.changePauseState();
+    expect(await token.isPaused()).to.equal(true);
+
+    await expect(
+      token.transfer(addr2.address, ethers.utils.parseUnits("50", 18))
+    ).to.be.revertedWith("All transfer activities are paused.");
   });
 });

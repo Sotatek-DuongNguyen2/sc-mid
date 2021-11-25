@@ -14,7 +14,7 @@ contract AstroZoo is ERC721 {
         return "https://www.google.com/search?q=";
     }
 
-    function mintCollectible() public {
+    function mint() public {
         _safeMint(msg.sender,counter);
         counter++;
     }
