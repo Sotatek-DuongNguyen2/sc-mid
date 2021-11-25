@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: Unlicensed
+//SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
 
@@ -59,15 +59,6 @@ contract FatShiba is ERC20 {
         uint256 amount
     ) internal override {
         super._beforeTokenTransfer(from,to,amount);
-        require(!isPaused,"All transfer activities are paused.");
-    }
-
-    function _afterTokenTransfer(
-        address from,
-        address to,
-        uint256 amount
-    ) internal override {
-        super._afterTokenTransfer(from,to,amount);
         require(!isPaused,"All transfer activities are paused.");
     }
 
